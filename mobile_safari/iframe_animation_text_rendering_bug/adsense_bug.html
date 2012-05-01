@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AdSense Mobile Safari Text Rendering Bug</title>
+    <meta name="viewport" content="width=320,user-scalable=no" />
+
+    <style type="text/css">
+            html, body {
+                width: 320px;
+                overflow: hidden;
+            }
+            body {
+                margin:0;
+                padding:0;
+            }
+
+            iframe {
+                float: left;
+                width: 320px;
+                height: 50px;
+            }
+
+            #mobile-ad {
+                float:none;
+                clear: both;
+                overflow: hidden;
+                height: 3;
+            }
+
+            #page {
+                -webkit-transform: scale(0.50);
+                -webkit-transform-origin-x: 0%;
+                -webkit-transform-origin-y: 0%;
+            }
+
+            #page.absolute {
+                position: absolute;
+                top: 50px;
+            }
+
+            #mobile-ad.absolute {
+                position: absolute;
+                z-index: 2;
+            }
+            #text {
+                font-size: 25px;
+            }
+
+            .abs {
+                position: absolute;
+                background-color: #2d2d2d;
+                color: silver;
+                padding: 10px;
+            }
+            #change-top {
+                font-size: 25px;
+            }
+
+            #fix-me-span {
+                background-color: transparent;
+                bottom: 0;
+            }
+    </style>
+    
+
+    <style>
+
+
+    </style>
+</head>
+
+
+<body>
+    <div id="mobile-ad">
+        <iframe name="adz" src="ads.html" width="320" height="50" marginwidth="0" marginheight="0" vspace="0" hspace="0" frameborder="0" allowtransparency="false" scrolling="no"></iframe>
+    </div>
+
+    <div id="page">
+        <div id="text">
+            Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. Pay close attention to the text. 
+        </div>
+        <span id ="change-top-span" class="abs" style="top: 0px"> 
+            <button id="change-top" onclick="return changeTop()"> current top: 0px; </button>
+        </span>
+    </div>
+    <span id="fix-me-span" class="abs"> 
+        <button id="fix-me" onclick="return fixMe()"> Change #page & #mobile-ad to absolute positions! </button>
+    </span>
+    <script>
+        function changeTop(px) {
+            var topSpan = document.getElementById('change-top-span');
+            if ( topSpan.style.top === '0px' ) {
+                topSpan.style.top = '-5px';
+                document.getElementById('change-top').innerText = 'current top: -5px;';
+            } else {
+                topSpan.style.top = '0px';
+                document.getElementById('change-top').innerText = 'current top: 0px;';
+            }
+            return false;
+        }
+
+        function fixMe() {
+            var page = document.getElementById('page');
+            if ( page.className === 'absolute' ) {
+                page.className = '';
+                document.getElementById('mobile-ad').className = '';
+                document.getElementById('fix-me').innerText = 'Change #page & #mobile-ad to absolute positions!';
+            } else {
+                page.className = 'absolute';
+                document.getElementById('mobile-ad').className = 'absolute';
+                document.getElementById('fix-me').innerText = 'Unfix me';
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.ad{
+    border:1px solid cyan;
+}
+.bbox{
+    background-color: #4D90FE;
+    height:48px;
+}
+
+div.bbox .subtitle{
+    color:#ffffff;
+    font-size:11px;
+    left:0;
+    overflow:hidden;
+    padding-top:19px;
+    padding-right:5px;
+    padding-bottom:0;
+    padding-left:8px;
+    position:absolute;
+}
+div.bbox .title{
+    color:#ffffff;
+    font-size: 14;
+}
+
+div.bbox .hide{
+    -webkit-transition-property:top;
+    -webkit-transition-duration:0.6s;
+    top:30px 
+}
+@-webkit-keyframes showani{
+    0% {
+        top:-15px;
+        opacity: 0   /* causes fonts to become jagged and degrades performance (can crash browser) */
+    }
+    100% { top:0; }
+}
+div.bbox .show{
+    -webkit-animation-name:showani;
+    -webkit-animation-duration:0.6s;
+    top:0
+}
+</style>
+
+</head>
+<body marginwidth="0" marginheight="0">
+<div class="ad">
+    <div class="bbox">
+        <div id="ad_text">
+            <div class="title">Example Ads</div>
+            <div class="subtitle show" id="text1">Click me and make money!</div>
+            <div class="subtitle hide" id="text2">
+                <div class="url_line">
+                    <span class="url">www.example.com/ads</span>
+                </div>
+            </div>
+        </div>
+    </div> <!-- bbox -->
+
+    <script>
+        function swap(n1, n2) {
+            document.getElementById(n1).className = 'subtitle show';
+            document.getElementById(n2).className = 'subtitle hide';
+        }
+        function animate() {
+            window.setTimeout('swap("text2","text1")', 5000);
+            window.setTimeout('swap("text1","text2")', 10600);
+            window.setTimeout('animate()', 16200);
+        }
+        animate();
+    </script>
+</div>
+</body>
+</html>
